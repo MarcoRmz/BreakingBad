@@ -82,7 +82,7 @@ public class Juego extends JFrame implements Runnable, KeyListener,
      * usarse en el <code>Applet</code> y se definen funcionalidades.
      */
     public void init() {
-        setSize(800, 700);  //Declara el tamaño del applet
+        setSize(1200, 800);  //Declara el tamaño del applet
         direccion = 0;  //Direccion Nula
         vidas = 5;  //Numero de vidas
         cont = 0;   //Cont inicia en 0
