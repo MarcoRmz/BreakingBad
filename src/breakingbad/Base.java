@@ -9,6 +9,7 @@
 
 package breakingbad;
 
+import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import java.awt.Point;
@@ -33,6 +34,14 @@ public class Base {
         this.posX = posX;
         this.posY = posY;
         this.animacion = animacion;
+    }
+    
+    /**
+     * Dibuja la animacion en la grafica
+     * @param g el objeto grafico donde se dibuja la animacion
+     */
+    public void dibuja(Graphics g) {
+        g.drawImage(this.getImagenI(), posX, posY, null);
     }
 
     /**
@@ -132,22 +141,17 @@ public class Base {
     }
     
     /**
-     * Guarda el objeto en un archivo de texto dado un escritor con un archivo cargado
-     *
-     * @param writer - El objeto para escribir en el archivo
+     * Cambia la animacion del objeto
+     * @param anim la nueva animacion del objeto
      */
-    public void guardar(PrintWriter writer) {
-        writer.println(posX);
-        writer.println(posY);
+    public void setAnimacion(Animacion anim) {
+        this.animacion = anim;
     }
     
     /**
-     * Carga el objeto de un archivo de texto dado un lector con un archivo cargado
-     *
-     * @param scanner - El objetp para leer el archivo
+     * Regresa la animacion del objeto
      */
-    public void cargar(Scanner scanner) {
-        posX = Integer.parseInt(scanner.nextLine());
-        posY = Integer.parseInt(scanner.nextLine());
+    public Animacion getAnimacion() {
+        return animacion;
     }
 }

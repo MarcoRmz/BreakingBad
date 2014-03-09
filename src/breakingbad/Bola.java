@@ -9,15 +9,15 @@
 
 package breakingbad;
 
-import java.io.PrintWriter;
-import java.util.Scanner;
+import java.awt.Image;
+import java.awt.Toolkit;
 
 public class Bola extends Base {
 
     //Variable contador
     private static int CONT = 0;
     //Variable velocidad en X y Y
-    private int velocidadX;
+    private double velocidadX;
     private int velocidadY;
 
     /**
@@ -26,34 +26,21 @@ public class Bola extends Base {
      *
      * @param posX es la <code>posiscion en x</code> del objeto Bola.
      * @param posY es el <code>posiscion en y</code> del objeto Bola.
-     * @param anima es la <code>animacion</code> del objeto Bola.
-     * @param velocidadX es la <code>velocidad</code> del objeto Bola en X
-     * @param velocidadY es la <code>velocidad</code> del objeto Bola en Y
      */
-    public Bola(int posX, int posY, Animacion anima, int velocidadX, int velocidadY) {
-        super(posX, posY, anima);
-        this.velocidadX = velocidadX;
-        this.velocidadY = velocidadY;
+    public Bola(int posX, int posY) {
+        super(posX, posY, crearAnimacionBola());
     }
+    
+    //crea ka animacion de la bola
+    private static Animacion crearAnimacionBola() {
+        Image bola = Toolkit.getDefaultToolkit().getImage("src/breakingbad/bola.png");
+        Image bola2 = Toolkit.getDefaultToolkit().getImage("src/breakingbad/bola2.png");
 
-    /**
-     * Metodo <I>getConteo</I> sobrescrito de la clase <code>Bola</code>.<P>
-     * En este metodo se regresa el valor del contador CONT.
-     *
-     * @return  regresa el valor de CONT de tipo <code>int</code>
-     */
-    public int getConteo() {
-        return CONT;
-    }
-
-    /**
-     * Metodo <I>aumentaConteo</I> sobrescrito de la clase <code>Bola</code>.<P>
-     * En este metodo se aumenta el conteo de malos desaparecidos.
-     *
-     * @void
-     */
-    public void aumentaConteo() {
-        CONT += 2;
+        //Se crea la animación de bola
+        Animacion animaBola = new Animacion();
+        animaBola.sumaCuadro(bola, 150);
+        animaBola.sumaCuadro(bola2, 150);
+        return animaBola;
     }
 
     /**
@@ -63,7 +50,7 @@ public class Bola extends Base {
      * @param vel contiene la nueva velocidad de tipo <code>int</code>
      * @void
      */
-    public void setVelocidadX(int vel) {
+    public void setVelocidadX(double vel) {
         velocidadX = vel;
     }
 
@@ -84,7 +71,7 @@ public class Bola extends Base {
      *
      * @return  regresa la velocidad de tipo <code>int</code>
      */
-    public int getVelocidadX() {
+    public double getVelocidadX() {
         return velocidadX;
     }
 
@@ -96,21 +83,5 @@ public class Bola extends Base {
      */
     public int getVelocidadY() {
         return velocidadY;
-    }
-
-    //hereda javadoc de base
-    public void guardar(PrintWriter writer) {
-        super.guardar(writer);
-        writer.println(CONT);
-        writer.println(velocidadX);
-        writer.println(velocidadY);
-    }
-
-    //hereda javadoc de base
-    public void cargar(Scanner scanner) {
-        super.cargar(scanner);
-        CONT = Integer.parseInt(scanner.nextLine());
-        velocidadX = Integer.parseInt(scanner.nextLine());
-        velocidadY = Integer.parseInt(scanner.nextLine());
     }
 }

@@ -9,15 +9,16 @@
 
 package breakingbad;
 
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class Bloque extends Base {
 
-    //Constantes strings
-    private static final String STR1 = "CAPTURADO";
-    private static final String STR2 = "PAUSADO";
-
+    private boolean danado = false;
+    private int tipo;
+    
     /**
      * Metodo constructor que hereda los atributos de la clase
      * <code>Base</code>.
@@ -26,37 +27,37 @@ public class Bloque extends Base {
      * @param posY es el <code>posiscion en y</code> del objeto Bloque.
      * @param anima es la <code>animacion</code> del objeto Bloque.
      */
-    public Bloque(int posX, int posY, Animacion anima) {
-        super(posX, posY, anima);
+    public Bloque(int posX, int posY, int tipo) {
+        super(posX, posY, crearAnimacionBloque(tipo));
+        this.tipo = tipo;
+    }
+    
+    //crea la animacion del bloque
+    private static Animacion crearAnimacionBloque(int tipo) {
+        Image bloque1 = Toolkit.getDefaultToolkit().getImage("src/breakingbad/bloque" + tipo + "1.png");
+
+        //Se crea la animación del bloque
+        Animacion anima = new Animacion();
+        anima.sumaCuadro(bloque1, 150);
+        return anima;
     }
 
     /**
-     * Metodo <I>getStr1</I> sobrescrito de la clase <code>Bloque</code>.<P>
-     * En este metodo se regresa el valor de STR1.
-     *
-     * @return  regresa el valor de STR1 de tipo <code>String</code>
+     * Se llama cuando se golpea el bloque.
+     * Si el bloque no estaba dañado, se marca como dañado
+     * Si ya estaba dañado, regresa que se debe destruir
+     * @return si el bloque se debe destruir o no
      */
-    public String getStr1() {
-        return STR1;
+    public boolean hit() {
+        if(!danado) {
+            Image bloque2 = Toolkit.getDefaultToolkit().getImage("src/breakingbad/bloque" + tipo + "2.png");
+            Animacion anima = new Animacion();
+            anima.sumaCuadro(bloque2, 150);
+            this.setAnimacion(anima);
+            danado = true;
+            return false;
+        }
+        return true;
     }
 
-    /**
-     * Metodo <I>init</I> sobrescrito de la clase <code>Bloque</code>.<P>
-     * En este metodo se regresa el valor de STR2.
-     *
-     * @return  regresa el valor de STR2 de tipo <code>String</code>
-     */
-    public String getStr2() {
-        return STR2;
-    }
-
-    //hereda javadoc de base
-    public void guardar(PrintWriter writer) {
-        super.guardar(writer);
-    }
-
-    //hereda javadoc de base
-    public void cargar(Scanner scanner) {
-        super.cargar(scanner);
-    }
 }
