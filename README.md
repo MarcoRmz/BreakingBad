@@ -1,7 +1,12 @@
-Juego en JFrame
+Final Project for VideoGame Class @Tec de Monterrey
+======
 
-@author Marco Ramírez A01191344
+## Description
+JFrame game ressembling brick breaker but with a Breaking Bad theme.
 
-@author Alfredo Altamirano A01191157
+## Team
+* Marco Ramírez A01191344
+* Alfredo Altamirano A01191157
 
-@date 03/08/14
+## Date
+**03/08/14**
